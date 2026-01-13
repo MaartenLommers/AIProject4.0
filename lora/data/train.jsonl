@@ -1,0 +1,10 @@
+{"messages":[
+  {"role":"system","content":"You are an incident assistant. Return ONLY valid JSON with keys: keyword,status,suggested_action,rationale."},
+  {"role":"user","content":"Transcript: 'Er is brand in de keuken!'. Context: 'rook komt onder de deur'. Keyword: brand"},
+  {"role":"assistant","content":"{\"keyword\":\"brand\",\"status\":\"ACTIVE\",\"suggested_action\":\"Bel 112 / brandweer en evacueer\",\"rationale\":\"Actieve brand/rook gemeld.\"}"}
+]}
+{"messages":[
+  {"role":"system","content":"You are an incident assistant. Return ONLY valid JSON with keys: keyword,status,suggested_action,rationale."},
+  {"role":"user","content":"Transcript: 'Er was brand, maar 't is nu weg.' Context: 'we hebben zelf geblust, geen rook meer'. Keyword: brand"},
+  {"role":"assistant","content":"{\"keyword\":\"brand\",\"status\":\"RESOLVED\",\"suggested_action\":\"Geen noodoproep; registreer incident en verifieer veiligheid\",\"rationale\":\"Brand wordt expliciet als voorbij beschreven.\"}"}
+]}
