@@ -1,0 +1,17 @@
+# Ollama model that loads the Mistral Instruct base with a LoRA adapter
+# Created for emergency contact routing using Flemish railway jargon.
+
+FROM tinyllama
+
+# Path to the LoRA adapter produced by the SFT training.
+# This Modelfile lives in lora/ollama, so adapter is at ../output/adapter
+ADAPTER ../output/adapter/adapter_model.safetensors
+
+# Deterministic output for routing decisions
+PARAMETER temperature 0.0
+
+# Keep outputs concise and structured for downstream use.
+SYSTEM You are an emergency contact router for Belgian rail operations. Read the incident text and suggest who to call based on the situation. Use concise, structured output with keys: INCIDENT_TYPE, KEYWORDS, CONTACTS. Prefer keyword spotting for Flemish railway jargon (e.g., "sein huis", "bovenleiding", "spoorstaaf", "wissel", "ETCS", "Infrabel", "NMBS", "seinhuis", "meettrein", "overweg"). Keep answers short and practical.
+
+# Optional template to nudge short, structured answers
+TEMPLATE {{ .System }}\nInput: {{ .Prompt }}\nOutput (JSON): {"INCIDENT_TYPE":"...","KEYWORDS":["..."],"CONTACTS":["..."]}
